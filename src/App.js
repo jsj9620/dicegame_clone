@@ -18,11 +18,15 @@ function App() {
         const nextNum = random(6);
         setNum(nextNum); // 다음 숫자 랜덤
     }
+
+    const handleClearClick = () => { // 주사위 초기화
+        setNum(1);
+    }
     return (
         <div>
             <div>
                 <Button onClick={handleRollClick}>던지기</Button>
-                <Button>처음부터</Button>
+                <Button onClick={handleClearClick}>처음부터</Button>
             </div>
             <Dice color="red" num={num} />
         </div>
