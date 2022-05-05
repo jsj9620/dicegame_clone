@@ -3,9 +3,9 @@
 
 import Dice from './Dice';
 
-function Board({ name, color, num, sum, gameHistory }) {
-    // distructuring 사용 / parameter로 초기값 전달받고 배열형태로 요소 두개 return
-    // 첫 요소는 state값 - 현재 변수의 값을 나타냄 / 두번째 요소는 setter 함수 - 함수를 호출할 때 parameter로 전달하는 값으로 state값이 변경됨
+function Board({ name, color, gameHistory }) {
+    const num = gameHistory[gameHistory.length - 1] || 1;
+    const sum = gameHistory.reduce((a, b) => a + b, 0); // (prevValue, currValue) => prevValue + currValue, initValue
     return (
         <div>
             <div>

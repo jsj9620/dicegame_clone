@@ -11,32 +11,23 @@ function random(n) { // 주사위값 랜덤
     return Math.ceil(Math.random() * n);
 }
 
+// 기록만 있으면 주사위 숫자값, 총점은 구할 수 있음 -> 리팩토링 요인
 function App() {
-    const [num, setNum] = useState(1); // 주사위 초기값 1
-    const [sum, setSum] = useState(0); // 점수 합계
-    const [gameHistory, setGameHistory] = useState([]); // 배열 사용해 주사위 기록 나타냄, 초기값은 빈 배열
-    const [otherNum, setOtherNum] = useState(1); // 주사위 초기값 1
-    const [otherSum, setOtherSum] = useState(0); // 점수 합계
-    const [otherGameHistory, setOtherGameHistory] = useState([]); // 배열 사용해 주사위 기록 나타냄, 초기값은 빈 배열
+    // distructuring 사용 / parameter로 초기값 전달받고 배열형태로 요소 두개 return
+    // 첫 요소는 state값 - 현재 변수의 값을 나타냄 / 두번째 요소는 setter 함수 - 함수를 호출할 때 parameter로 전달하는 값으로 state값이 변경됨
+    const [myHistory, setMyHistory] = useState([]); // 배열 사용해 주사위 기록 나타냄, 초기값은 빈 배열
+    const [otherHistory, setOtherHistory] = useState([]); // 배열 사용해 주사위 기록 나타냄, 초기값은 빈 배열
 
     const handleRollClick = () => { // 주사위 던지기
-        const nextNum = random(6);
+        const nextMyNum = random(6);
         const nextOtherNum = random(6); // 상대 주사위 숫자
-        setNum(nextNum); // 다음 숫자 랜덤
-        setSum(sum + nextNum);
-        setGameHistory([...gameHistory, nextNum]);
-        setOtherNum(nextOtherNum); // 다음 숫자 랜덤
-        setOtherSum(otherSum + nextOtherNum);
-        setOtherGameHistory([...otherGameHistory, nextOtherNum]);
+        setMyHistory([...myHistory, nextMyNum]);
+        setOtherHistory([...otherHistory, nextOtherNum]);
     };
 
     const handleClearClick = () => { // 주사위 초기화
-        setNum(1);
-        setSum(0);
-        setGameHistory(0);
-        setOtherNum(1);
-        setOtherSum(0);
-        setOtherGameHistory(0);
+        setMyHistory([]);
+        setOtherHistory([]);
     };
 
     return (
@@ -46,8 +37,8 @@ function App() {
                 <Button onClick={handleClearClick}>처음부터</Button>
             </div>
             <div>
-                <Board name="나" color="blue" num={num} sum={sum} gameHistory={gameHistory} />
-                <Board name="상대" color="red" num={otherNum} sum={otherSum} gameHistory={otherGameHistory} />
+                <Board name="나" color="blue" gameHistory={myHistory} />
+                <Board name="상대" color="red" gameHistory={otherHistory} />
             </div>
         </div>
     );
