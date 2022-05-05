@@ -12,8 +12,16 @@
     color: #7090ff;
 }
 
+.Button.blue:hover {
+    background-color: rgba(0, 89, 255, 0.3);
+}
+
 .Button.red {
     background-color: rgba(255, 78, 78, 0.2);
     border: solid 1px #ff4664;
     color: #ff4664;
+}
+
+.Button.red:hover {
+    background-color: rgba(255, 78, 78, 0.3);
 }

@@ -7,6 +7,7 @@ import { useState } from 'react';
 import Button from './Button';
 import Board from './Board';
 import './App.css';
+import logoImg from './assets/logo.png';
 
 function random(n) { // 주사위값 랜덤
     return Math.ceil(Math.random() * n);
@@ -31,16 +32,31 @@ function App() {
         setOtherHistory([]);
     };
 
+    let myClassName = 'Board';
+    let otherClassName = 'Board';
+    if (myHistory[myHistory.length - 1] > otherHistory[otherHistory.length - 1]) {
+        myClassName += ' Board-winner';
+    } else {
+        otherClassName += ' Board-winner';
+    }
+
     return (
         <div className="App">
+            <div>
+                <img className="App-logo" src={logoImg} alt="logo"/>
+                <h1 className="App-title">주사위게임</h1>
+            </div>
             <div>
                 <Button className="App-button" color="blue" onClick={handleRollClick}>던지기</Button>
                 <Button className="App-button" color="red" onClick={handleClearClick}>처음부터</Button>
             </div>
-            <div>
-                <Board name="나" color="blue" gameHistory={myHistory} />
-                <Board name="상대" color="red" gameHistory={otherHistory} />
+            <div className="App-boards">
+                <div>
+                    <Board className={myClassName} name="나" color="blue" gameHistory={myHistory} />
+                    <Board className={otherClassName} name="상대" color="red" gameHistory={otherHistory} />
+                </div>
             </div>
+            
         </div>
     );
 }
